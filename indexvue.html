@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>vueapp</title>
+  </head>
+<style>
+      #app {
+          background: grey;
+          
+      }
+  
+</style>
+
+<body>
+      
+    <div id="app">
+        
+        <h1>Hantverks produkter</h1>   
+        
+            <ul>
+            <div v-for="products in info">  
+            <li>{{ products.name }}: <br> {{ products.description }} <br>{{ products.consumerPrice }} </li>
+        </ul>
+        </div>
+    </div>
+              
+<script>
+new Vue({
+  el: '#app',
+  data () {
+      title: "Produkter"
+  
+    return {
+      info: null
+    }
+  },
+  mounted () {
+    axios
+      .get('https://www.hulabeck.se/html/temp/products.json')
+      .then(response => (this.info = response.data.products))
+  }
+})
+</script>
+</body>
+</html>
+
